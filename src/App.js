@@ -13,40 +13,45 @@ function App() {
     setmessage("");
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+ const handleSubmit = (e) => {
+  e.preventDefault();
 
-    if (name === "" || email === "" || phone === "" || dob === "") {
-      setmessage("Please fill out all fields");
-      return;
-    }
+  // 1️⃣ Email format check
+  if (email && !email.includes("@")) {
+    alert("Invalid email");
+    return;
+  }
 
-     if (!email.includes("@")) {
-      setmessage("Invalid email");
-      return;
-    }
-
-     if (phone.length !== 10) {
+  // 2️⃣ Phone length check
+  if (phone && phone.length !== 10) {
     alert("Invalid phone number");
     return;
   }
 
-   const today = new Date();
-  const selectedDate = new Date(dob);
+  // 3️⃣ DOB future check
+  if (dob) {
+    const today = new Date();
+    const selectedDate = new Date(dob);
+    if (selectedDate > today) {
+      alert("Invalid date of birth");
+      return;
+    }
+  }
 
-  if (selectedDate > today) {
-    alert("Invalid date of birth");
+  // 4️⃣ Empty fields check
+  if (name === "" || email === "" || phone === "" || dob === "") {
+    setmessage("Please fill out all fields");
     return;
   }
 
-    
-   setname("");
-setemail("");
-setphone("");
-setdob("");
-setmessage("");
-    
-  };
+  // 5️⃣ ✅ SUCCESS: reset form (no alert!)
+  setname("");
+  setemail("");
+  setphone("");
+  setdob("");
+  setmessage("");
+ }
+
 
   return (
     <div>
