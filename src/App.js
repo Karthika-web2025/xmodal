@@ -16,24 +16,24 @@ function App() {
  const handleSubmit = (e) => {
   e.preventDefault();
 
-  // 1️⃣ Email format check
+  // 1️⃣ Email validation
   if (email && !email.includes("@")) {
-    alert("Invalid email");
+    alert("Invalid email. Please check your email address.");
     return;
   }
 
-  // 2️⃣ Phone length check
+  // 2️⃣ Phone validation
   if (phone && phone.length !== 10) {
-    alert("Invalid phone number");
+    alert("Invalid phone number. Please enter a 10-digit phone number.");
     return;
   }
 
-  // 3️⃣ DOB future check
+  // 3️⃣ DOB validation (future date)
   if (dob) {
     const today = new Date();
     const selectedDate = new Date(dob);
     if (selectedDate > today) {
-      alert("Invalid date of birth");
+      alert("Invalid date of birth.");
       return;
     }
   }
@@ -44,67 +44,65 @@ function App() {
     return;
   }
 
-  // 5️⃣ ✅ SUCCESS: reset form (no alert!)
+  // 5️⃣ ✅ Success: reset form to initial state
   setname("");
   setemail("");
   setphone("");
   setdob("");
   setmessage("");
- }
+};
+
 
 
   return (
     <div>
       <h1>User Details Modal</h1>
-      <button onClick={handleModal} className='btn btn-primary'>Open Form</button>
+     <button onClick={handleModal}>Open Form</button>
 
-      {showModal && (
-        <div className="modal" onClick={() => setShowModal(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <form onSubmit={handleSubmit}>
-              <h2>Fill Details:</h2>
+{showModal && (
+  <div className="modal" onClick={() => setShowModal(false)}>
+    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <form onSubmit={handleSubmit}>
+        <label>Username:</label>
+        <input
+          id="username"
+          type="text"
+          value={name}
+          onChange={(e) => setname(e.target.value)}
+        />
 
-              <label>Username:</label>
-              <input
-                type="text"
-                value={name}
-                required
-                onChange={(e) => setname(e.target.value)}
-              />
-              <br /><br />
+        <label>Email:</label>
+        <input
+          id="email"
+          type="email"
+          value={email}
+          onChange={(e) => setemail(e.target.value)}
+        />
 
-              <label>Email Address:</label>
-              <input
-                type="email"
-                value={email}
-                required
-                onChange={(e) => setemail(e.target.value)}
-              />
-              <br /><br />
+        <label>Phone:</label>
+        <input
+          id="phone"
+          type="number"
+          value={phone}
+          onChange={(e) => setphone(e.target.value)}
+        />
 
-              <label>Phone Number:</label>
-              <input
-                type="text"
-                value={phone}
-                required
-                onChange={(e) => setphone(e.target.value)}
-              />
-              <br /><br />
+        <label>DOB:</label>
+        <input
+          id="dob"
+          type="date"
+          value={dob}
+          onChange={(e) => setdob(e.target.value)}
+        />
 
-              <label>Date of Birth:</label>
-              <input
-                type="date"
-                value={dob}
-                required
-                onChange={(e) => setdob(e.target.value)}
-              />
-              <br /><br />
+        <button type="submit" className="submit-button">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+)}
 
-              <button className='btn btn-primary' type="submit">Submit</button>
-            </form>
-          </div>
-        </div>
-      )}
 
       {message && <p>{message}</p>}
     </div>
