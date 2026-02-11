@@ -22,12 +22,12 @@ function App() {
     }
 
      if (!email.includes("@")) {
-      setmessage("Please include an '@' in the email address.");
+      setmessage("Invalid email. Please check your email address.");
       return;
     }
 
      if (phone.length !== 10) {
-    alert("Invalid phone number. Please enter a 10-digit phone number");
+    alert("Invalid phone number. Please enter a 10-digit phone number.**");
     return;
   }
 
@@ -35,7 +35,7 @@ function App() {
   const selectedDate = new Date(dob);
 
   if (selectedDate > today) {
-    alert("Invalid date of birth. Date of birth cannot be in the future");
+    alert("Invalid date of birth");
     return;
   }
 
@@ -54,8 +54,8 @@ setmessage("");
       <button onClick={handleModal} className='btn btn-primary'>Open Form</button>
 
       {showModal && (
-        <div className="modal">
-          <div className="modal-content">
+        <div className="modal" onClick={() => setShowModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <form onSubmit={handleSubmit}>
               <h2>Fill Details:</h2>
 
