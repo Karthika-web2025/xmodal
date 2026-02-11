@@ -22,12 +22,12 @@ function App() {
     }
 
      if (!email.includes("@")) {
-      setmessage("Invalid email. Please check your email address.");
+      setmessage("Invalid email");
       return;
     }
 
      if (phone.length !== 10) {
-    alert("Invalid phone number. Please enter a 10-digit phone number.**");
+    alert("Invalid phone number");
     return;
   }
 
